@@ -1,5 +1,15 @@
 " General
 set nocompatible
+
+" Use pathogen to easily modify the runtime path to include all plugins under
+" the ~/.vim/bundle directory
+filetype off                    " force reloading *after* pathogen loaded
+runtime bundle/vim-pathogen/autoload/pathogen.vim " Allow Pathogen to be a submodule
+call pathogen#infect()
+call pathogen#helptags()
+filetype plugin indent on       " enable detection, plugins and indenting in one step
+syntax on
+
 set viminfo='20,\"500,h
 set history=500
 set shortmess=filnxtToOI
@@ -132,3 +142,41 @@ elseif filereadable( expand("$ROOT/ctags.out") )
    set tags=$ROOT/ctags.out
 endif
 set guioptions-=T
+
+
+" NERDTree settings {{{
+" Put focus to the NERD Tree with F3 (tricked by quickly closing it and
+" immediately showing it again, since there is no :NERDTreeFocus command)
+nnoremap <leader>n :NERDTreeClose<CR>:NERDTreeToggle<CR>
+nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+nnoremap <leader>N :NERDTreeClose<CR>
+
+" Store the bookmarks file
+let NERDTreeBookmarksFile=expand("$HOME/.vim/NERDTreeBookmarks")
+
+" Show the bookmarks table on startup
+let NERDTreeShowBookmarks=1
+
+" Show hidden files, too
+let NERDTreeShowFiles=1
+let NERDTreeShowHidden=1
+
+" Quit on opening files from the tree
+let NERDTreeQuitOnOpen=1
+
+" Highlight the selected entry in the tree
+let NERDTreeHighlightCursorline=1
+
+" Use a single click to fold/unfold directories and a double click to open
+" files
+let NERDTreeMouseMode=2
+
+" Don't display these kinds of files
+let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
+            \ '\.o$', '\.so$', '\.egg$', '^\.git$' ]
+
+" }}}
+
+
+
+
