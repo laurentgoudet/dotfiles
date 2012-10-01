@@ -1,8 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =6
-let g:netrw_dirhist_1='/home/g178977/ob1cable-noeit/appli/modules/casware-trunk/src'
-let g:netrw_dirhist_2='/home/g178977/ob1cable-noeit/appli/modules/casware-trunk'
-let g:netrw_dirhist_3='/home/g178977/ob1cable-noeit/appli/modules/casware-trunk/include'
-let g:netrw_dirhist_4='/home/g178977/ob1cable-noeit/appli/modules/casware-trunk/src/cas_client/cas_dscr'
-let g:netrw_dirhist_5='/home/g178977/ob1cable-noeit/appli/modules/casware-trunk/src/cas_client'
-let g:netrw_dirhist_6='/home/g178977/ob1cable-noeit/appli/modules/casware-trunk/src/cas_client/cas_dscr'
