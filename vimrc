@@ -176,17 +176,18 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
 " }}}
 
 " CSApprox settings {{{
-if &term =~ '^\(xterm\|screen\)$' && $COLORTERM == 'gnome-terminal'
+if !has("gui_running")
   set t_Co=256
 endif
 "}}}
 
 " Solarise settings {{{
-set background=light
-let g:solarized_termtrans=1
+set background=dark
+"let g:solarized_termtrans=1
 let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-colorscheme solarized_white
+"let g:solarized_contrast="high"
+"let g:solarized_visibility="high"
+call togglebg#map("<F5>")
+colorscheme solarized
 "}}}
 
