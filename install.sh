@@ -25,5 +25,10 @@ else
     ln -s $(pwd)/vim ~/.vim
 fi
 
-#git submodule init
-#git submodule update
+git submodule init
+git submodule update
+
+# Command-T plugin must be built!
+cd ~/.vim/bundle/command-t/ruby/command-t
+ruby extconf.rb
+make

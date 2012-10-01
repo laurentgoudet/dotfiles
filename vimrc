@@ -75,7 +75,8 @@ autocmd BufRead * try | cd- | catch | endtry
 
 " Set color scheme
 syntax on
-colorscheme default
+colorscheme molokai
+set background=dark
 " Enable indent folding
 " set foldenable
 " set fdm=indent
@@ -149,7 +150,6 @@ set guioptions-=T
 
 " NERDTree settings {{{
 nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>b :NERDTreeFromBookmark<Space>
 nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
 
 " Show the bookmarks table on startup
@@ -158,6 +158,9 @@ let NERDTreeShowBookmarks=1
 " Show hidden files, too
 let NERDTreeShowFiles=1
 let NERDTreeShowHidden=1
+
+" No cursor line
+let NERDTreeHighlightCursorline=0
 
 " Use a single click to fold/unfold directories and a double click to open
 " files
@@ -172,6 +175,18 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
 
 " }}}
 
+" Solarise settings {{{
+"set background=light
+"let g:solarized_termtrans=1
+"let g:solarized_termcolors=256
+"let g:solarized_contrast="high"
+"let g:solarized_visibility="high"
+"colorscheme solarized
+"}}}
 
-
+" CSApprox settings {{{
+if &term =~ '^\(xterm\|screen\)$' && $COLORTERM == 'gnome-terminal'
+  set t_Co=256
+endif
+"}}}
 
