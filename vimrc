@@ -15,7 +15,6 @@ let mapleader=","
 
 set viminfo='20,\"500,h
 set history=500
-set shortmess=filnxtToOI
 
 " set backspace to be able to delete previous characters???Enable line numbering, taking up 6 spaces
 set bs=2
@@ -54,8 +53,8 @@ imap <F11> <ESC>1G=Ga
 
 " Turn on incremental search with ignore case (except explicit caps)
 set incsearch
-set ignorecase
-set smartcase
+set ignorecase    " use case-insensitive search by default
+set smartcase     " case-sensitive search if at least one capital letter
 
 " Informative status line
 set statusline=%-3.3n\ %t\ %h%m%r%w\[%{strlen(&ft)?&ft:'none'},%{&encoding},%{&fileformat}]\ %=%-14.(%l,%c%V%)\ %<%P
@@ -75,8 +74,7 @@ autocmd BufRead * try | cd- | catch | endtry
 
 " Set color scheme
 syntax on
-colorscheme molokai
-set background=dark
+
 " Enable indent folding
 " set foldenable
 " set fdm=indent
@@ -147,6 +145,10 @@ elseif filereadable( expand("$ROOT/ctags.out") )
 endif
 set guioptions-=T
 
+" Windows's style copy-and-paste
+nmap <C-V> "+gP
+imap <C-V> <ESC><C-V>i
+vmap <C-C> "+y
 
 " NERDTree settings {{{
 nnoremap <leader>n :NERDTreeToggle<CR>
@@ -175,19 +177,20 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
 
 " }}}
 
-" CSApprox settings {{{
+" Solarise settings {{{
+"colorscheme solarized-white
+call togglebg#map("")          " Load the ToggleBG pluggin with default mapping (<F5>)
 if !has("gui_running")
   set t_Co=256
+else
+  set background=light         " Default to light theme with GUI
 endif
-"}}}
-
-" Solarise settings {{{
-set background=dark
 "let g:solarized_termtrans=1
 let g:solarized_termcolors=256
-"let g:solarized_contrast="high"
-"let g:solarized_visibility="high"
-call togglebg#map("<F5>")
-colorscheme solarized
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
+colorscheme solarized-white
 "}}}
+
+
 

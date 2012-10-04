@@ -229,7 +229,7 @@ hi clear
 if exists("syntax_on")
   syntax reset
 endif
-let colors_name = "solarized_white"
+let colors_name = "solarized-white"
 
 "}}}
 " GUI & CSApprox hexadecimal palettes"{{{
@@ -249,7 +249,7 @@ if (has("gui_running") && g:solarized_degrade == 0)
     let s:base0       = "#839496"
     let s:base1       = "#93a1a1"
     let s:base2       = "#eee8d5"
-    let s:base3       = "#ffffff"
+    let s:base3       = "#fdf6e3"
     let s:yellow      = "#b58900"
     let s:orange      = "#cb4b16"
     let s:red         = "#dc322f"
@@ -259,6 +259,7 @@ if (has("gui_running") && g:solarized_degrade == 0)
     let s:cyan        = "#2aa198"
     "let s:green       = "#859900" "original
     let s:green       = "#719e07" "experimental
+    let s:white       = "#ffffff"
 elseif (has("gui_running") && g:solarized_degrade == 1)
     " These colors are identical to the 256 color mode. They may be viewed
     " while in gui mode via "let g:solarized_degrade=1", though this is not
@@ -271,7 +272,7 @@ elseif (has("gui_running") && g:solarized_degrade == 1)
     let s:base0       = "#808080"
     let s:base1       = "#8a8a8a"
     let s:base2       = "#d7d7af"
-    let s:base3       = "#ffffff"
+    let s:base3       = "#ffffd7"
     let s:yellow      = "#af8700"
     let s:orange      = "#d75f00"
     let s:red         = "#af0000"
@@ -280,6 +281,7 @@ elseif (has("gui_running") && g:solarized_degrade == 1)
     let s:blue        = "#0087ff"
     let s:cyan        = "#00afaf"
     let s:green       = "#5f8700"
+    let s:white       = "#ffffff"
 elseif g:solarized_termcolors != 256 && &t_Co >= 16
     let s:vmode       = "cterm"
     let s:base03      = "8"
@@ -298,6 +300,7 @@ elseif g:solarized_termcolors != 256 && &t_Co >= 16
     let s:blue        = "4"
     let s:cyan        = "6"
     let s:green       = "2"
+    let s:white       = "16"
 elseif g:solarized_termcolors == 256
     let s:vmode       = "cterm"
     let s:base03      = "234"
@@ -306,8 +309,8 @@ elseif g:solarized_termcolors == 256
     let s:base00      = "240"
     let s:base0       = "244"
     let s:base1       = "245"
-    let s:base2       = "254"
-    let s:base3       = "256"
+    let s:base2       = "187"
+    let s:base3       = "230"
     let s:yellow      = "136"
     let s:orange      = "166"
     let s:red         = "124"
@@ -316,6 +319,7 @@ elseif g:solarized_termcolors == 256
     let s:blue        = "33"
     let s:cyan        = "37"
     let s:green       = "64"
+    let s:white       = "256"
 else
     let s:vmode       = "cterm"
     let s:bright      = "* term=bold cterm=bold"
@@ -351,7 +355,7 @@ else
     let s:blue        = "DarkBlue"      " 4
     let s:cyan        = "DarkCyan"      " 6
     let s:green       = "DarkGreen"     " 2
-
+    let s:white       = "White"         " 0
 endif
 "}}}
 " Formatting options and null values for passthrough effect "{{{
@@ -390,7 +394,7 @@ if &background == "light"
     let s:base2       = s:temp02
     let s:base3       = s:temp03
     if (s:back != "NONE")
-        let s:back    = s:base03
+        let s:back    = s:white
     endif
 endif
 "}}}
@@ -452,6 +456,7 @@ exe "let s:bg_magenta   = ' ".s:vmode."bg=".s:magenta."'"
 exe "let s:bg_violet    = ' ".s:vmode."bg=".s:violet ."'"
 exe "let s:bg_blue      = ' ".s:vmode."bg=".s:blue   ."'"
 exe "let s:bg_cyan      = ' ".s:vmode."bg=".s:cyan   ."'"
+exe "let s:bg_white     = ' ".s:vmode."bg=".s:white  ."'"
 
 exe "let s:fg_none      = ' ".s:vmode."fg=".s:none   ."'"
 exe "let s:fg_back      = ' ".s:vmode."fg=".s:back   ."'"
@@ -618,7 +623,11 @@ exe "hi! IncSearch"      .s:fmt_stnd   .s:fg_orange .s:bg_none
 exe "hi! Search"         .s:fmt_revr   .s:fg_yellow .s:bg_none
 exe "hi! MoreMsg"        .s:fmt_none   .s:fg_blue   .s:bg_none
 exe "hi! ModeMsg"        .s:fmt_none   .s:fg_blue   .s:bg_none
-exe "hi! LineNr"         .s:fmt_none   .s:fg_base02 .s:bg_base03
+if &background == "light"
+exe "hi! LineNr"         .s:fmt_none   .s:fg_base02 .s:bg_white
+else
+exe "hi! LineNr"         .s:fmt_none   .s:fg_base01 .s:bg_base02
+endif
 exe "hi! Question"       .s:fmt_bold   .s:fg_cyan   .s:bg_none
 if ( has("gui_running") || &t_Co > 8 )
     exe "hi! VertSplit"  .s:fmt_none   .s:fg_base00 .s:bg_base00
