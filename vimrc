@@ -1,4 +1,5 @@
-" General
+" My VIM config
+" Vrygoud <vrygoud@gmail.com>
 set nocompatible
 
 " Use pathogen to easily modify the runtime path to include all plugins under
@@ -22,6 +23,7 @@ set number
 "set numberwidth=1
 set tabpagemax=20
 set wildmode=longest,list
+set wildignore+=*.o,*.obj,*.git,*.class,*.png,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap
 
 " Turn off word wrapping
 set wrap!
@@ -72,9 +74,6 @@ set noswapfile
 set autowrite
 autocmd BufRead * try | cd- | catch | endtry
 
-" Set color scheme
-syntax on
-
 " Enable indent folding
 " set foldenable
 " set fdm=indent
@@ -86,9 +85,9 @@ nnoremap <space> za
 set bufhidden=hide
 
 " Have 3 lines of offset (or buffer) when scrolling
-set scrolloff=3
+set scrolloff=5
 set sidescrolloff=6
-set scrolljump=3
+"set scrolljump=3
 
 " Views / Sessions
 set viewoptions=folds,cursor
@@ -150,6 +149,9 @@ nmap <C-V> "+gP
 imap <C-V> <ESC><C-V>i
 vmap <C-C> "+y
 
+" X Window paste at mouse position and not cursor position
+nnoremap <MiddleMouse> <LeftMouse><MiddleMouse>
+
 " NERDTree settings {{{
 nnoremap <leader>n :NERDTreeToggle<CR>
 nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
@@ -192,5 +194,40 @@ let g:solarized_visibility="high"
 colorscheme solarized-white
 "}}}
 
+" SuperTab settings {{{
+"let g:SuperTabDefaultCompletionType = "context"
+"}}}
 
+" DirDiff settings {{{
+if &diff
+  call DirDiff("A","B")
+endif
+let g:DirDiffExcludes = ".svn,.git,*.class,*.exe,.*.swp"
+let g:DirDiffWindowSize = 10 
+"}}}
 
+" Disable arrow keys to stay on the home row {{{
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+"}}}
+
+" Write a file as root from non-root Vim
+cmap W w !sudo tee % >/dev/null<CR>:e!<CR><CR>
+
+" Taglist
+nnoremap <silent> <F8> :TlistToggle<CR>
+let Tlist_Auto_Open = 0
+let Tlist_Exit_OnlyWindow = 1    " exit if taglist is last window open
+let Tlist_Show_One_File = 1      " Only show tags for current buffer
+let Tlist_Use_Right_Window = 0   " Open on right side
+let Tlist_Enable_Fold_Column = 0 " no fold column (only showing one file)
+let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
+if !has("gui_running")
+  let Tlist_Inc_Winwidth=0       " for konsole
+endif
