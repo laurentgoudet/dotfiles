@@ -207,18 +207,18 @@ let g:DirDiffWindowSize = 10
 "}}}
 
 " Disable arrow keys to stay on the home row {{{
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
+"map <up> <nop>
+"map <down> <nop>
+"map <left> <nop>
+"map <right> <nop>
+"imap <up> <nop>
+"imap <down> <nop>
+"imap <left> <nop>
+"imap <right> <nop>
 "}}}
 
-" Write a file as root from non-root Vim
-cmap W w !sudo tee % >/dev/null<CR>:e!<CR><CR>
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " Taglist
 nnoremap <silent> <F8> :TlistToggle<CR>
