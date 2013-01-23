@@ -44,7 +44,6 @@ set softtabstop=2
 " Special chars
 " Flag problematic whitespace (trailing and spaces before tabs)
 " Use :set list! to toggle visible whitespace on/off
-set list
 set listchars=tab:>-,trail:.,extends:>
 
 " indent depends on filetype
@@ -240,4 +239,5 @@ command! -nargs=1 -complete=file -bar M call MoveFile('<args>')
 
 " Remove all trailing whitespace
 nnoremap <silent> <F5> :let w:winview = winsaveview()<Bar>:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>call winrestview(w:winview)<CR>
+nnoremap <silent> <F6> :set list!<CR>
 

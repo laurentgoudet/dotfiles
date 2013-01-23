@@ -1,4 +1,5 @@
 #!/bin/bash
+# VIMRC install script
 
 if [ -f ~/.vimrc ] && [ ! -L ~/.vimrc ]
 then
