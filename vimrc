@@ -1,5 +1,5 @@
 " My VIM config
-" Vrygoud <vrygoud@gmail.com>
+" Chris Goudet <me@chrisgoudet.com>
 set nocompatible
 
 " Use pathogen to easily modify the runtime path to include all plugins under
@@ -40,14 +40,16 @@ set smarttab
 " indent width for autoindent
 set shiftwidth=2
 set softtabstop=2
+
 " Special chars
-" set listchars=nbsp:_,tab:,trail:.
-"set list
-"set listchars=tab:__,trail:.
+" Flag problematic whitespace (trailing and spaces before tabs)
+" Use :set list! to toggle visible whitespace on/off
+set list
+set listchars=tab:>-,trail:.,extends:>
 
 " indent depends on filetype
-filetype indent on 
-filetype plugin indent on 
+filetype indent on
+filetype plugin indent on
 
 " Shortcut to auto indent entire file
 nmap <F11> 1G=G
@@ -73,13 +75,6 @@ set nobackup
 set noswapfile
 set autowrite
 autocmd BufRead * try | cd- | catch | endtry
-
-" Enable indent folding
-" set foldenable
-" set fdm=indent
-
-" Set space to toggle a fold
-nnoremap <space> za
 
 " Hide buffer when not in window (to prevent relogin with FTP edit)
 set bufhidden=hide
@@ -153,25 +148,24 @@ vmap <C-C> "+y
 nnoremap <MiddleMouse> <LeftMouse><MiddleMouse>
 
 " NERDTree settings {{{
-nnoremap <leader>n :NERDTreeToggle<CR>
-nnoremap <leader>m :NERDTreeClose<CR>:NERDTreeFind<CR>
+nnoremap <silent> <F7> :NERDTreeToggle<CR>
 
 " Show the bookmarks table on startup
-let NERDTreeShowBookmarks=1
+let NERDTreeShowBookmarks=0
 
 " Show hidden files, too
 let NERDTreeShowFiles=1
-let NERDTreeShowHidden=1
+let NERDTreeShowHidden=0
 
 " No cursor line
 let NERDTreeHighlightCursorline=0
 
 " Use a single click to fold/unfold directories and a double click to open
 " files
-let NERDTreeMouseMode=2
+let NERDTreeMouseMode=1
 
 " Use old-school look of directory nodes
-let NERDTreeDirArrows=0
+let NERDTreeDirArrows=1
 
 " Don't display these kinds of files
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
@@ -203,7 +197,7 @@ if &diff
   call DirDiff("A","B")
 endif
 let g:DirDiffExcludes = ".svn,.git,*.class,*.exe,.*.swp"
-let g:DirDiffWindowSize = 10 
+let g:DirDiffWindowSize = 10
 "}}}
 
 " Disable arrow keys to stay on the home row {{{
@@ -218,16 +212,32 @@ let g:DirDiffWindowSize = 10
 "}}}
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
-command W :execute ':silent w !sudo tee % > /dev/null' | :edit!
+command! W :execute ':silent w !sudo tee % > /dev/null' | :edit!
 
 " Taglist
 nnoremap <silent> <F8> :TlistToggle<CR>
 let Tlist_Auto_Open = 0
 let Tlist_Exit_OnlyWindow = 1    " exit if taglist is last window open
-let Tlist_Show_One_File = 1      " Only show tags for current buffer
-let Tlist_Use_Right_Window = 0   " Open on right side
+let Tlist_Show_One_File = 0      " Only show tags for current buffer
+let Tlist_Use_Right_Window = 1   " Open on right side
 let Tlist_Enable_Fold_Column = 0 " no fold column (only showing one file)
 let tlist_ant_settings = 'ant;p:Project;r:Property;t:Target'
 if !has("gui_running")
   let Tlist_Inc_Winwidth=0       " for konsole
 endif
+
+" Move a file within Vim
+" Still need to be fixed
+function! MoveFile(newspec)
+     let old = expand('%')
+     if (old == a:newspec)
+         return 0
+     endif
+     exe 'sav' fnameescape(a:newspec)
+     call delete(old)
+endfunction
+command! -nargs=1 -complete=file -bar M call MoveFile('<args>')
+
+" Remove all trailing whitespace
+nnoremap <silent> <F5> :let w:winview = winsaveview()<Bar>:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>call winrestview(w:winview)<CR>
+
