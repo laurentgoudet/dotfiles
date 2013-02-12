@@ -30,4 +30,7 @@
 	url = git://github.com/ervandew/supertab.git
 [submodule "vim/bundle/vim-colors-solarized"]
 	path = vim/bundle/vim-colors-solarized
-	url = https://github.com/vrygoud/vim-colors-solarized.git
+	url = https://github.com/chrisgoudet/vim-colors-solarized.git
+[submodule "vim/bundle/python-mode"]
+	path = vim/bundle/python-mode
+	url = git://github.com/klen/python-mode.git
