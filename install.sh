@@ -110,7 +110,8 @@ case "$1" in
         ;;
     esac
   done
-  
-    note "Done."
-    ;;
+  note "Installing bin/ directory"
+  link $basedir/bin $HOME/bin
+  note "Done."
+  ;;
 esac
