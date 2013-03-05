@@ -4,7 +4,7 @@
 #      ./install.sh [install|uninstall] (default: install)
 #
 
-basedir=$(dirname $0)
+basedir="$(cd "$(dirname "$0")" && pwd -P)"
 
 function has() {
     return $( which $1 >/dev/null )
@@ -24,33 +24,33 @@ function die() {
 }
 
 function link() {
-    src=$1
-    dest=$2
+    target=$1
+    link=$2
 
-    if [ -e $dest ]; then
-        if [ -L $dest ]; then
+    if [ -e $link ]; then
+        if [ -L $link ]; then
             # Already symlinked -- I'll assume correctly.
             return
         else
             # Rename files with a ".old" extension.
-            warn "$dest file already exists, renaming to $dest.old"
-            backup=$dest.old
+            warn "$link file already exists, renaming to $link.old"
+            backup=$link.old
             if [ -e $backup ]; then
                 die "$backup already exists. Aborting."
             fi
-            mv -v $dest $backup
+            mv -v $link $backup
         fi
     fi
 
     # Update existing or create new symlinks.
-    ln -vsf $src $dest
+    ln -vsf $target $link
 }
 
 function unlink() {
     link=$1
 
-    if [ -e $dest ]; then
-      if [ -L $dest ]; then
+    if [ -e $link ]; then
+      if [ -L $link ]; then
         # Deleting current link
 	rm $link
       else
@@ -69,13 +69,14 @@ case "$1" in
   # UNINSTALL -----------------------------------------------------------------
   uninstall)
     note "Uninstalling dotfiles.."
+    cd $basedir
     for dotfile in * ; do
       case $dotfile in 
-        .|..|.git|README.md)
+        .|..|.git|README.md|install.sh)
 	  continue
 	  ;;
         *)
-          unlink $HOME/$dotfile
+          unlink $HOME/.$dotfile
           ;;
       esac
     done
@@ -85,13 +86,14 @@ case "$1" in
   # INSTALL -------------------------------------------------------------------
   *)
     note "Installing dotfiles.."
+    cd $basedir
     for dotfile in * ; do
       case $dotfile in 
-        .|..|.git|README.md)
+        .|..|.git|README.md|install.sh)
 	  continue
 	  ;;
         *)
-          link $basedir/$dotfile $HOME/$dotfile
+          link $basedir/$dotfile $HOME/.$dotfile
           ;;
       esac
     done
