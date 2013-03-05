@@ -4,7 +4,7 @@
 #      ./install.sh [install|uninstall] (default: install)
 #
 
-basedir="$(cd "$(dirname $0)" && pwd -P)"
+basedir="$(cd "$(dirname "$0")" && pwd -P)"
 
 function has() {
     return $( which $1 >/dev/null )
