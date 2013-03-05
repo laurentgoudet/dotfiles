@@ -38,27 +38,28 @@ function link() {
             if [ -e $backup ]; then
                 die "$backup already exists. Aborting."
             fi
-            mv -v $link $backup
+            mv $link $backup
         fi
     fi
 
     # Update existing or create new symlinks.
-    ln -vsf $target $link
+    note "Creating symlink $link"
+    ln -sf $target $link
 }
 
 function unlink() {
     link=$1
-
     if [ -e $link ]; then
       if [ -L $link ]; then
         # Deleting current link
-	rm $link
+        note "Deletink symlink $link"
+        rm $link
       else
         warn "$link in not a symlink!"
       fi
-      if [ -f $link.old]; then
+      if [ -e $link.old ]; then
         # Restoring old configuration
-        note "restoring old configuration for $link"
+        note "Restoring old configuration for $link"
         mv $link.old $link
       fi
     fi
@@ -70,13 +71,19 @@ case "$1" in
   uninstall)
     note "Uninstalling dotfiles.."
     cd $basedir
-    for dotfile in * ; do
-      case $dotfile in 
-        .|..|.git|README.md|install.sh)
-	  continue
-	  ;;
+    for dotfile in .* ; do
+      case $dotfile in
+        .gitconfig.base)
+          unlink $HOME/.gitconfig
+          ;;
+        .ssh)
+          unlink $HOME/.ssh/config
+          ;;  
+        .|..|.git|.gitconfig.base)
+          continue
+          ;;
         *)
-          unlink $HOME/.$dotfile
+          unlink $HOME/$dotfile
           ;;
       esac
     done
@@ -85,18 +92,25 @@ case "$1" in
 
   # INSTALL -------------------------------------------------------------------
   *)
-    note "Installing dotfiles.."
-    cd $basedir
-    for dotfile in * ; do
-      case $dotfile in 
-        .|..|.git|README.md|install.sh)
-	  continue
-	  ;;
-        *)
-          link $basedir/$dotfile $HOME/.$dotfile
-          ;;
-      esac
-    done
+  note "Installing dotfiles..."
+  cd $basedir
+  for dotfile in .* ; do
+    case $dotfile in
+      .gitconfig.base)
+        link $basedir/$dotfile $HOME/.gitconfig
+        ;;  
+      .ssh)
+        link $basedir/.ssh/config $HOME/.ssh/config
+        ;;  
+      .|..|.git|.gitconfig.base)
+        continue
+        ;;
+      *)
+        link $basedir/$dotfile $HOME/$dotfile
+        ;;
+    esac
+  done
+  
     note "Done."
     ;;
 esac
