@@ -32,12 +32,13 @@
 	hs = stash save
 	last = log -1
 	l = log --oneline --decorate
+	ldiff = log -p
 	newb = checkout -b
 	quicklog = log --oneline --decorate -10
 	quicklog-long = log --oneline --decorate
 	r = remote
 	rewind-one = reset --hard HEAD^
-	st = status
+	st = status -s
 	sta = stash
 	svnci = svn dcommit
 	svnprep = rebase -i git-svn
