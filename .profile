@@ -25,6 +25,10 @@ _pip_completion()
 complete -o default -F _pip_completion pip
 # pip bash completion end
 
+# Platform specific paths
+if [ -f "$HOME/.host_profile" ] ; then
+    . "$HOME/.host_profile"
+fi
 # Android tools
 if [ -d "$HOME/dev/sdk/android-sdk-linux" ] ; then
     PATH="$PATH:$HOME/dev/sdk/android-sdk-linux/tools:$HOME/dev/sdk/android-sdk-linux/platform-tools"
