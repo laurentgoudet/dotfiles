@@ -93,6 +93,5 @@ setterm -blength 0
 
 # Set the default editor to vim
 export EDITOR="vim"
-export PATH="$PATH:$HOME/and/android-sdk-linux/tools:and/android-sdk-linux/platform-tools"
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
