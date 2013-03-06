@@ -1,4 +1,4 @@
-# ~/.profile: run time modifying stuffs
+# ~/.profile: executed by the command interpreter for login shells.
 
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
