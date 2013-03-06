@@ -12,7 +12,7 @@ fi
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
-xset b 0
+#xset b 0
 setterm -blength 0
 
 # pip bash completion start
