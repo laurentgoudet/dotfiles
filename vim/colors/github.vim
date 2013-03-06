@@ -20,7 +20,7 @@ if version > 580
 endif
 let g:colors_name="github"
 
-hi Normal       guifg=#000000 guibg=#F8F8FF
+hi Normal       guifg=#333333 guibg=#FFFFFF
 
 " {{{ Cursor
 hi Cursor		guibg=#444454 guifg=#F8F8FF
@@ -40,7 +40,7 @@ hi Folded		guibg=#ECECEC guifg=#808080 gui=bold
 hi vimFold		guibg=#ECECEC guifg=#808080 gui=bold
 hi FoldColumn	guibg=#ECECEC guifg=#808080 gui=bold
 
-hi LineNr		guifg=#959595 guibg=#ECECEC gui=bold
+hi LineNr		guifg=#DDDDDD guibg=#FFFFFF
 hi NonText		guifg=#808080 guibg=#ECECEC
 hi Folded		guifg=#808080 guibg=#ECECEC gui=bold
 hi FoldeColumn  guifg=#808080 guibg=#ECECEC gui=bold
