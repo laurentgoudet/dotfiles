@@ -1,4 +1,4 @@
-# Things related to interactive Bash usage
+# ~/.bashrc: executed by bash(1) for non-login shells.
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -96,4 +96,3 @@ export EDITOR="vim"
 export PATH="$PATH:$HOME/and/android-sdk-linux/tools:and/android-sdk-linux/platform-tools"
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-
