@@ -34,3 +34,6 @@
 [submodule "vim/bundle/python-mode"]
 	path = vim/bundle/python-mode
 	url = git://github.com/klen/python-mode.git
+[submodule "vim/plugin/hilinks"]
+	path = vim/plugin/hilinks
+	url = git://github.com/kergoth/vim-hilinks.git
