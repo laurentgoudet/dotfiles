@@ -1,6 +1,6 @@
 #!/bin/sh
 export CSCOPE_DB=$(pwd)
-find . -path '*build*' -prune -o \
+find . -path '*build*' -prune \
        -o -name '*.py' \
        -o -name '*.java' \
        -o -iname '*.[CH]' \
