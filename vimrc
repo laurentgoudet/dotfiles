@@ -54,11 +54,19 @@ filetype plugin indent on
 nmap <F11> 1G=G
 imap <F11> <ESC>1G=Ga
 
+"""""""""""""""""""""""""""""""
+" SEARCH
 " Turn on incremental search with ignore case (except explicit caps)
 set incsearch
 set ignorecase    " use case-insensitive search by default
 set smartcase     " case-sensitive search if at least one capital letter
 
+" Highlight search
+set hlsearch
+" Press space to clear search highlighting and any message already displayed.
+nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
+
+""""""""""""""""""""""""""""""""
 " Informative status line
 set statusline=%-3.3n\ %t\ %h%m%r%w\[%{strlen(&ft)?&ft:'none'},%{&encoding},%{&fileformat}]\ %=%-14.(%l,%c%V%)\ %<%P
 
@@ -90,11 +98,6 @@ set sessionoptions=blank,buffers,curdir,folds,help,options,resize,tabpages,winsi
 
 " Diff
 set diffopt=filler,vertical
-
-" Highlight search
-set hlsearch
-" Press space to clear search highlighting and any message already displayed.
-nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
 
 " Clipboard
 set clipboard=autoselect
@@ -139,9 +142,9 @@ endif
 set guioptions-=T
 
 " Windows's style copy-and-paste
-nmap <C-V> "+gP
-imap <C-V> <ESC><C-V>i
-vmap <C-C> "+y
+"nmap <C-V> "+gP
+"imap <C-V> <ESC><C-V>i
+"vmap <C-C> "+y
 
 " X Window paste at mouse position and not cursor position
 nnoremap <MiddleMouse> <LeftMouse><MiddleMouse>
@@ -168,7 +171,7 @@ let NERDTreeDirArrows=1
 
 " Don't display these kinds of files
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-            \ '\.o$', '\.so$', '\.egg$', '^\.git$' , '^\.svn$' ]
+	    \ '\.o$', '\.so$', '\.egg$', '^\.git$' , '^\.svn$' ]
 
 " }}}
 
@@ -179,12 +182,13 @@ if !has("gui_running")
   set t_Co=256
 else
   set background=light         " Default to light theme with GUI
+  set guifont=Monospace\ 9
 endif
 "let g:solarized_termtrans=1
 let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
-colorscheme solarized-white
+colorscheme github
 "}}}
 
 " SuperTab settings {{{
@@ -230,7 +234,7 @@ endif
 function! MoveFile(newspec)
      let old = expand('%')
      if (old == a:newspec)
-         return 0
+	 return 0
      endif
      exe 'sav' fnameescape(a:newspec)
      call delete(old)
@@ -240,4 +244,10 @@ command! -nargs=1 -complete=file -bar M call MoveFile('<args>')
 " Remove all trailing whitespace
 nnoremap <silent> <F5> :let w:winview = winsaveview()<Bar>:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>call winrestview(w:winview)<CR>
 nnoremap <silent> <F6> :set list!<CR>
+
+nnoremap <leader>ln :setlocal number!<CR>
+nnoremap <leader>pm :set paste!<CR>
+
+
+
 
