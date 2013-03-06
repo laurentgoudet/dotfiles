@@ -31,6 +31,7 @@
 	h = stash
 	hs = stash save
 	last = log -1
+	l = log --oneline --decorate
 	newb = checkout -b
 	quicklog = log --oneline --decorate -10
 	quicklog-long = log --oneline --decorate
