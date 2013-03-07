@@ -29,8 +29,8 @@ function link() {
 
     if [ -e $link ]; then
         if [ -L $link ]; then
-            # Already symlinked -- I'll assume correctly.
-            return
+            # Already symlinked -- Let's update it anyway
+            rm $link
         else
             # Rename files with a ".old" extension.
             warn "$link file already exists, renaming to $link.old"
@@ -112,6 +112,12 @@ case "$1" in
   done
   note "Installing bin/ directory"
   link $basedir/bin $HOME/bin
+  note "Setting up vim bundles"
+  git submodule init
+  git submodule update
+  cd ~/.vim/bundle/command-t/ruby/command-t
+  ruby extconf.rb
+  make
   note "Done."
   ;;
 esac
