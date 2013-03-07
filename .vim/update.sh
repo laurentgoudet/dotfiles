@@ -16,7 +16,7 @@
 #
 
 vimdir="$(cd "$(dirname "$0")" && pwd -P)"
-bundledir=$vimdir/bundle
+bundledir=.vim/bundle
 me=$vimdir/update.sh
 
 # I have an old server with outdated CA certs.
@@ -32,7 +32,7 @@ fi
 # This is a list of all plugins which are available via Git repos. https:// URLs
 # don't work.
 repos=(
-  'pathogen;https://github.com/tpope/vim-pathogen.git'
+  #'pathogen;https://github.com/tpope/vim-pathogen.git'
   'nerdtree;https://github.com/scrooloose/nerdtree'
   'command-t;https://github.com/wincent/Command-T.git'
   'pyflakes;https://github.com/kevinw/pyflakes-vim.git'
@@ -68,7 +68,7 @@ case "$1" in
         fi
       fi
       echo "Updating $name.."
-      git subtree add --prefix=$dest $url master
+      git subtree add --prefix=$dest --squash $url master
     done
     ;;
 
