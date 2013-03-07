@@ -68,7 +68,7 @@ case "$1" in
         fi
       fi
       echo "Updating $name.."
-      git subtree pull --prefix=$dest $url master
+      git subtree add --prefix=$dest $url master
     done
     ;;
 
