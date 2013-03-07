@@ -31,6 +31,3 @@
 [submodule ".vim/bundle/hilinks"]
 	path = .vim/bundle/hilinks
 	url = git://github.com/kergoth/vim-hilinks.git
-[submodule ".vim/bundle/vimdroid"]
-	path = .vim/bundle/vimdroid
-	url = ssh://git@bitbucket.org/lgoudet/vimdroid.git
