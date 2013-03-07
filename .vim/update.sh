@@ -34,7 +34,7 @@ fi
 repos=(
   'pathogen;https://github.com/tpope/vim-pathogen.git'
   'nerdtree;https://github.com/scrooloose/nerdtree'
-  'command-t;https://github.com/wincent/Command-T.git'
+  'ctrlp;https://github.com/kien/ctrlp.vim.git'
   'pyflakes;https://github.com/kevinw/pyflakes-vim.git'
   'csapprox;https://github.com/godlygeek/csapprox.git'
   'solarized;https://github.com/altercation/vim-colors-solarized.git'
