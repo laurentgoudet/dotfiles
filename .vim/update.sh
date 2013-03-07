@@ -32,12 +32,12 @@ fi
 # This is a list of all plugins which are available via Git repos. https:// URLs
 # don't work.
 repos=(
-  #'pathogen;https://github.com/tpope/vim-pathogen.git'
-#  'nerdtree;https://github.com/scrooloose/nerdtree'
-#  'command-t;https://github.com/wincent/Command-T.git'
-#  'pyflakes;https://github.com/kevinw/pyflakes-vim.git'
-#  'csapprox;https://github.com/godlygeek/csapprox.git'
-#  'solarized;https://github.com/altercation/vim-colors-solarized.git'
+  'pathogen;https://github.com/tpope/vim-pathogen.git'
+  'nerdtree;https://github.com/scrooloose/nerdtree'
+  'command-t;https://github.com/wincent/Command-T.git'
+  'pyflakes;https://github.com/kevinw/pyflakes-vim.git'
+  'csapprox;https://github.com/godlygeek/csapprox.git'
+  'solarized;https://github.com/altercation/vim-colors-solarized.git'
   'snipmate;https://github.com/msanders/snipmate.vim.git'
   'nerdcommenter;https://github.com/scrooloose/nerdcommenter.git'
   'supertab;https://github.com/ervandew/supertab.git'
@@ -59,7 +59,6 @@ case "$1" in
       parts=($(echo $pair | tr ';' '\n'))
       name=${parts[0]}
       url=${parts[1]}
-      filename=${parts[2]}
       dest=$bundledir/$name
       if [ -n "$2" ]; then
         if ! (echo "$url" | grep "$2" &>/dev/null) ; then
@@ -67,7 +66,7 @@ case "$1" in
         fi
       fi
       echo "Updating $name.."
-      git subtree add --prefix=$dest --squash $url master
+      git subtree pull --prefix=$dest --squash $url master
     done
     ;;
 
@@ -117,11 +116,20 @@ case "$1" in
   list)
     echo "Installed VIM plugins"
     echo "====================="
-    echo "-> As submodules:"
-    for repo in ${repos[@]}; do
-      echo "- $repo"
+    echo "-> As Git subtrees:"
+    for pair in ${repos[@]}; do
+      parts=($(echo $pair | tr ';' '\n'))
+      name=${parts[0]}
+      url=${parts[1]}
+      echo "- $name ($url)"
     done
     echo "-> Standalone:"
+    for pair in ${others[@]}; do
+      parts=($(echo $pair | tr ';' '\n'))
+      name=${parts[0]}
+      url=${parts[1]}
+      echo "- $name ($url)"
+    done
     ;;
 
   # HELP ----------------------------------------------------------------
