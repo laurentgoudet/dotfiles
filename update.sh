@@ -15,10 +15,9 @@
 #   ./update.sh repos powerline
 #
 
-
-vimdir=$PWD/.vim
+basedir="$(cd "$(dirname "$0")" && pwd -P)"
+vimdir=$basedir/.vim
 bundledir=$vimdir/bundle
-tmp=/tmp/$LOGNAME-vim-update
 me=.vim/update.sh
 
 # I have an old server with outdated CA certs.
@@ -31,41 +30,52 @@ fi
 
 # URLS --------------------------------------------------------------------
 
-# This is a list of all plugins which are available via Git repos. git:// URLs
+# This is a list of all plugins which are available via Git repos. https:// URLs
 # don't work.
-repos=`git submodule status | awk '{print $2}' | awk -F'/' '{print $3}'`
+repos=(
+  'pathogen;https://github.com/tpope/vim-pathogen.git'
+  'nerdtree;https://github.com/scrooloose/nerdtree'
+  'command-t;https://github.com/wincent/Command-T.git'
+  'pyflakes;https://github.com/kevinw/pyflakes-vim.git'
+  'csapprox;https://github.com/godlygeek/csapprox.git'
+  'solarized;https://github.com/altercation/vim-colors-solarized.git'
+  'vcscomand;https://repo.or.cz/vcscommand'
+  'snipmate;https://github.com/msanders/snipmate.vim.git'
+  'nerdcommenter;https://github.com/scrooloose/nerdcommenter.git'
+  'supertab;https://github.com/ervandew/supertab.git'
+  'hitlinks;https://github.com/kergoth/vim-hilinks.git'
+  'taglist;https://github.com/vim-scripts/taglist.vim.git'
+  'vimdroid;https://git@bitbucket.org/lgoudet/vimdroid.git'
+  )
 
 # Here's a list of everything else to download in the format
 # <destination>;<url>[;<filename>]
 other=(
-  'zenburn/colors;http://slinky.imukuppi.org/zenburn/zenburn.vim'
-  'wombat/colors;http://files.werx.dk/wombat.vim'
-  'glsl/syntax;http://www.vim.org/scripts/download_script.php?src_id=3194;glsl.vim'
   )
 
 case "$1" in
 
   # GIT -----------------------------------------------------------------
   repos)
-    for repo in ${repos[@]}; do
+    for pair in ${repos[@]}; do
+      parts=($(echo $pair | tr ';' '\n'))
+      name=${parts[0]}
+      url=${parts[1]}
+      filename=${parts[2]}
+      dest=$bundledir/$name
       if [ -n "$2" ]; then
         if ! (echo "$url" | grep "$2" &>/dev/null) ; then
           continue
         fi
       fi
-      echo "Updating $repo.."
-      git clone $url $dest
-      rm -rf $dest/.git
+      echo "Updating $name.."
+      git subtree pull --prefix=$dest $url master
     done
     ;;
 
   # TARBALLS AND SINGLE FILES -------------------------------------------
   other)
     set -x
-    mkdir -p $bundledir
-    rm -rf $tmp
-    mkdir $tmp
-    pushd $tmp
 
     for pair in ${other[@]}; do
       parts=($(echo $pair | tr ';' '\n'))
@@ -104,7 +114,6 @@ case "$1" in
     done
 
     popd
-    rm -rf $tmp
     ;;
 
   list)
