@@ -33,18 +33,17 @@ fi
 # don't work.
 repos=(
   #'pathogen;https://github.com/tpope/vim-pathogen.git'
-  'nerdtree;https://github.com/scrooloose/nerdtree'
-  'command-t;https://github.com/wincent/Command-T.git'
-  'pyflakes;https://github.com/kevinw/pyflakes-vim.git'
-  'csapprox;https://github.com/godlygeek/csapprox.git'
-  'solarized;https://github.com/altercation/vim-colors-solarized.git'
-  'vcscomand;https://repo.or.cz/vcscommand'
+#  'nerdtree;https://github.com/scrooloose/nerdtree'
+#  'command-t;https://github.com/wincent/Command-T.git'
+#  'pyflakes;https://github.com/kevinw/pyflakes-vim.git'
+#  'csapprox;https://github.com/godlygeek/csapprox.git'
+#  'solarized;https://github.com/altercation/vim-colors-solarized.git'
   'snipmate;https://github.com/msanders/snipmate.vim.git'
   'nerdcommenter;https://github.com/scrooloose/nerdcommenter.git'
   'supertab;https://github.com/ervandew/supertab.git'
   'hitlinks;https://github.com/kergoth/vim-hilinks.git'
   'taglist;https://github.com/vim-scripts/taglist.vim.git'
-  'vimdroid;https://git@bitbucket.org/lgoudet/vimdroid.git'
+  'vimdroid;ssh://git@bitbucket.org/lgoudet/vimdroid.git'
   )
 
 # Here's a list of everything else to download in the format
