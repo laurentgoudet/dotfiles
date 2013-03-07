@@ -56,13 +56,11 @@ imap <F11> <ESC>1G=Ga
 
 """""""""""""""""""""""""""""""
 " SEARCH
-" Turn on incremental search with ignore case (except explicit caps)
-set incsearch
+set incsearch     " incremental search
 set ignorecase    " use case-insensitive search by default
 set smartcase     " case-sensitive search if at least one capital letter
+set hlsearch      " highlight search results
 
-" Highlight search
-set hlsearch
 " Press space to clear search highlighting and any message already displayed.
 nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
 
@@ -245,9 +243,27 @@ command! -nargs=1 -complete=file -bar M call MoveFile('<args>')
 nnoremap <silent> <F5> :let w:winview = winsaveview()<Bar>:let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<Bar>call winrestview(w:winview)<CR>
 nnoremap <silent> <F6> :set list!<CR>
 
+" Toggle line numbers
 nnoremap <leader>ln :setlocal number!<CR>
+" Toggle paste mode
 nnoremap <leader>pm :set paste!<CR>
+" Toggle wrap mode
+nnoremap <leader>w :setlocal wrap!<CR>:setlocal wrap?<CR>
 
+"""""""""""""""""""""""""""""""
+" BUFFER NAVIGATION
+nnoremap <leader>n :bnext<CR>
+nnoremap <leader>p :bprev<CR>
+ " :nnoremap <leader>l :ls<cr>:b<space>
+""""""""""""""""""""""""""""""""
 
+"""""""""""""""""""""""""""""""
+" CODING STYLE
+nnoremap <leader>t :set expandtab tabstop=4 shiftwidth=4 softtabstop=4<CR>
+nnoremap <leader>T :set expandtab tabstop=8 shiftwidth=8 softtabstop=4<CR>
+nnoremap <leader>M :set noexpandtab tabstop=8 softtabstop=4 shiftwidth=4<CR>
+nnoremap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
+""""""""""""""""""""""""""""""""
 
+let g:ctrlp_dotfiles = 1
