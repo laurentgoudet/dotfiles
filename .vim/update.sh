@@ -15,10 +15,9 @@
 #   ./update.sh repos powerline
 #
 
-basedir="$(cd "$(dirname "$0")" && pwd -P)"
-vimdir=$basedir/.vim
+vimdir="$(cd "$(dirname "$0")" && pwd -P)"
 bundledir=$vimdir/bundle
-me=.vim/update.sh
+me=$vimdir/update.sh
 
 # I have an old server with outdated CA certs.
 if [ -n "$INSECURE" ]; then
