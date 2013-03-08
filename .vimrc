@@ -66,7 +66,9 @@ nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
 
 """"""""""""""""""""""""""""""""
 " Informative status line
-set statusline=%-3.3n\ %t\ %h%m%r%w\[%{strlen(&ft)?&ft:'none'},%{&encoding},%{&fileformat}]\ %=%-14.(%l,%c%V%)\ %<%P
+"set statusline=%-3.3n\ %t\ %h%m%r%w\[%{strlen(&ft)?&ft:'none'},%{&encoding},%{&fileformat}]\ %=%-14.(%l,%c%V%)\ %<%P
+" Status line now handled by Powerline
+set laststatus=2
 
 " Keyboard / Mouse
 set backspace=indent,eol,start
