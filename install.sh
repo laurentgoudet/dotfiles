@@ -29,8 +29,8 @@ function link() {
 
     if [ -e $link ]; then
         if [ -L $link ]; then
-            # Already symlinked -- I'll assume correctly.
-            return
+            # Already symlinked -- Let's update it anyway
+            rm $link
         else
             # Rename files with a ".old" extension.
             warn "$link file already exists, renaming to $link.old"
@@ -38,27 +38,28 @@ function link() {
             if [ -e $backup ]; then
                 die "$backup already exists. Aborting."
             fi
-            mv -v $link $backup
+            mv $link $backup
         fi
     fi
 
     # Update existing or create new symlinks.
-    ln -vsf $target $link
+    note "Creating symlink $link"
+    ln -sf $target $link
 }
 
 function unlink() {
     link=$1
-
     if [ -e $link ]; then
       if [ -L $link ]; then
         # Deleting current link
-	rm $link
+        note "Deletink symlink $link"
+        rm $link
       else
         warn "$link in not a symlink!"
       fi
-      if [ -f $link.old]; then
+      if [ -e $link.old ]; then
         # Restoring old configuration
-        note "restoring old configuration for $link"
+        note "Restoring old configuration for $link"
         mv $link.old $link
       fi
     fi
@@ -70,13 +71,19 @@ case "$1" in
   uninstall)
     note "Uninstalling dotfiles.."
     cd $basedir
-    for dotfile in * ; do
-      case $dotfile in 
-        .|..|.git|README.md|install.sh)
-	  continue
-	  ;;
+    for dotfile in .* ; do
+      case $dotfile in
+        .gitconfig.base)
+          unlink $HOME/.gitconfig
+          ;;
+        .ssh)
+          unlink $HOME/.ssh/config
+          ;;  
+        .|..|.git|.gitconfig.base)
+          continue
+          ;;
         *)
-          unlink $HOME/.$dotfile
+          unlink $HOME/$dotfile
           ;;
       esac
     done
@@ -85,18 +92,33 @@ case "$1" in
 
   # INSTALL -------------------------------------------------------------------
   *)
-    note "Installing dotfiles.."
-    cd $basedir
-    for dotfile in * ; do
-      case $dotfile in 
-        .|..|.git|README.md|install.sh)
-	  continue
-	  ;;
-        *)
-          link $basedir/$dotfile $HOME/.$dotfile
-          ;;
-      esac
-    done
-    note "Done."
-    ;;
+  note "Installing dotfiles..."
+  cd $basedir
+  for dotfile in .* ; do
+    case $dotfile in
+      .gitconfig.base)
+        link $basedir/$dotfile $HOME/.gitconfig
+        ;;  
+      .ssh)
+        link $basedir/.ssh/config $HOME/.ssh/config
+        ;;  
+      .|..|.git|.gitconfig.base)
+        continue
+        ;;
+      *)
+        link $basedir/$dotfile $HOME/$dotfile
+        ;;
+    esac
+  done
+  note "Installing bin/ directory"
+  link $basedir/bin $HOME/bin
+  note "Setting up vim bundles"
+  git submodule init
+  git submodule update
+  cd ~/.vim/bundle/command-t/ruby/command-t
+  ruby extconf.rb
+  make
+  note "Done."
+  ;;
 esac
+

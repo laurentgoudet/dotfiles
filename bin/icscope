@@ -1,0 +1,23 @@
+#!/bin/sh
+export CSCOPE_DB=$(pwd)
+find . -path '*build*' -prune \
+       -o -name '*.py' \
+       -o -name '*.java' \
+       -o -iname '*.[CH]' \
+       -o -name '*.cpp' \
+       -o -name '*.cc' \
+       -o -name '*.hpp'  \
+       -o -name '*.java'  \
+       -o -name '*.xml'  \
+       -o -name '*.in' \
+       -o -name '*.php' \
+       -o -name '*.js' \
+       -o -name '*.css' \
+       -o -name 'CMakeLists.txt' \
+       -not -type l \
+       > cscope.files
+
+# -b: just build
+# -q: create inverted index
+cscope -bvq
+
