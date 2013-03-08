@@ -23,7 +23,7 @@ set number
 "set numberwidth=1
 set tabpagemax=20
 set wildmode=longest,list
-set wildignore+=*.o,*.obj,*.git,*.class,*.png,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap
+set wildignore+=*.o,*.obj,*.git,*.class,*.png,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap,*/i686*
 
 " Turn off word wrapping
 set wrap!
