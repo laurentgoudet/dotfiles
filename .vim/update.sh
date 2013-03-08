@@ -43,6 +43,7 @@ repos=(
   'supertab;https://github.com/ervandew/supertab.git'
   'hitlinks;https://github.com/kergoth/vim-hilinks.git'
   'taglist;https://github.com/vim-scripts/taglist.vim.git'
+  'syntastic;https://github.com/scrooloose/syntastic.git'
   'vimdroid;ssh://git@bitbucket.org/lgoudet/vimdroid.git'
   )
 
