@@ -12,6 +12,7 @@
 [github]
 	user = chrisgoudet
 [alias]
+	b = branch -a
 	br = branch
 	bnew = checkout -b
 	ci = commit
