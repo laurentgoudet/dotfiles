@@ -268,4 +268,8 @@ nnoremap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 """"""""""""""""""""""""""""""""
 
+" FILE EXPLORER
+""
+"let g:ctrlp_map = '<c-p>'
 let g:ctrlp_dotfiles = 1
+
