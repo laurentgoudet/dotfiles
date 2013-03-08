@@ -89,3 +89,18 @@ The `install.sh` script allow easly deployement of this configuration.
 ./install.sh
 ```
 
+
+
+File opening (thanks to CTRL-P)
+------------------------------
+<C-P> To open file browser
+Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
+Press <c-f> and <c-b> to cycle between modes.
+Press <c-d> to switch to filename search instead of full path.
+Press <c-r> to switch to regexp mode.
+Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+Use <c-y> to create a new file and its parent directories.
+Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+Use :25 to jump to line 25.
+Use :/any\:\ string to jump to the first instance of any: string.
+Use :diffthis when opening files marked by <c-z> to run :diffthis on the first 4 files.
