@@ -89,7 +89,7 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 #xset b 0
-setterm -blength 0
+#setterm -blength 0
 
 # Set the default editor to vim
 export EDITOR="vim"
