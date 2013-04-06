@@ -88,6 +88,11 @@ fi
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
+
+if [ -f /usr/share/git-core/git-completion.bash ]
+then
+	. /usr/share/git-core/git-completion.bash
+fi
 #xset b 0
 #setterm -blength 0
 stty -ixon -ixoff
