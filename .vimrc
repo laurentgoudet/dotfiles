@@ -178,17 +178,21 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
 " Solarise settings {{{
 "colorscheme solarized-white
 call togglebg#map("")          " Load the ToggleBG pluggin with default mapping (<F5>)
-if !has("gui_running")
+if !has('gui') && v:version < 703 " Do not load CSApprox
   set t_Co=256
+  colorscheme molokai-term
+  let g:CSApprox_loaded=1
 else
-  set background=light         " Default to light theme with GUI
-  set guifont=Monospace\ 9
+  if has('gui')
+    set background=light         " Default to light theme with GUI
+    set guifont=Monospace\ 9
+  endif
+  let g:solarized_termcolors=256
+  let g:solarized_contrast="high"
+  let g:solarized_visibility="high"
+  colorscheme molokai
 endif
 "let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-colorscheme molokai
 "}}}
 
 " SuperTab settings {{{
