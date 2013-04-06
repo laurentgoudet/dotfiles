@@ -34,4 +34,3 @@ if [ -d "$HOME/dev/sdk/android-sdk-linux" ] ; then
     PATH="$PATH:$HOME/dev/sdk/android-sdk-linux/tools:$HOME/dev/sdk/android-sdk-linux/platform-tools"
 fi
 
-
