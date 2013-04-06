@@ -19,11 +19,11 @@ set history=500
 
 " set backspace to be able to delete previous characters???Enable line numbering, taking up 6 spaces
 set bs=2
-set number
+"set number
 "set numberwidth=1
 set tabpagemax=20
 set wildmode=longest,list
-set wildignore+=*.o,*.obj,*.git,*.class,*.png,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap
+set wildignore+=*.o,*.obj,*.git,*.class,*.png,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap,*/i686*,tags
 
 " Turn off word wrapping
 set wrap!
@@ -66,7 +66,9 @@ nnoremap <silent> <Space> :silent noh<Bar>echo<CR>
 
 """"""""""""""""""""""""""""""""
 " Informative status line
-set statusline=%-3.3n\ %t\ %h%m%r%w\[%{strlen(&ft)?&ft:'none'},%{&encoding},%{&fileformat}]\ %=%-14.(%l,%c%V%)\ %<%P
+"set statusline=%-3.3n\ %t\ %h%m%r%w\[%{strlen(&ft)?&ft:'none'},%{&encoding},%{&fileformat}]\ %=%-14.(%l,%c%V%)\ %<%P
+" Status line now handled by Powerline
+set laststatus=2
 
 " Keyboard / Mouse
 set backspace=indent,eol,start
@@ -148,7 +150,7 @@ set guioptions-=T
 nnoremap <MiddleMouse> <LeftMouse><MiddleMouse>
 
 " NERDTree settings {{{
-nnoremap <silent> <F7> :NERDTreeToggle<CR>
+nnoremap <silent> <F7> :NERDTreeFind<CR>
 
 " Show the bookmarks table on startup
 let NERDTreeShowBookmarks=0
@@ -186,20 +188,20 @@ endif
 let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
-colorscheme github
+colorscheme molokai
 "}}}
 
 " SuperTab settings {{{
 "let g:SuperTabDefaultCompletionType = "context"
 "}}}
 
-" DirDiff settings {{{
-if &diff
-  call DirDiff("A","B")
-endif
-let g:DirDiffExcludes = ".svn,.git,*.class,*.exe,.*.swp"
-let g:DirDiffWindowSize = 10
-"}}}
+"" DirDiff settings {{{
+"if &diff
+  "call DirDiff("A","B")
+"endif
+"let g:DirDiffExcludes = ".svn,.git,*.class,*.exe,.*.swp"
+"let g:DirDiffWindowSize = 10
+""}}}
 
 " Disable arrow keys to stay on the home row {{{
 "map <up> <nop>
@@ -266,4 +268,11 @@ nnoremap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 
 """"""""""""""""""""""""""""""""
 
+" FILE EXPLORER
+""
+"let g:ctrlp_map = '<c-p>'
 let g:ctrlp_dotfiles = 1
+
+if has("mouse")
+  set mouse=a
+endif

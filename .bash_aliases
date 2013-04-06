@@ -1,6 +1,6 @@
 # Bash aliases, separate from .bashrc to keep things more tidy
 
-alias ll='ls -alF'
+alias ll='ls -ahlF'
 alias la='ls -A'
 alias l='ls -CF'
 
