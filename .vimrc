@@ -19,11 +19,11 @@ set history=500
 
 " set backspace to be able to delete previous characters???Enable line numbering, taking up 6 spaces
 set bs=2
-set number
+"set number
 "set numberwidth=1
 set tabpagemax=20
 set wildmode=longest,list
-set wildignore+=*.o,*.obj,*.git,*.class,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap,*/i686*,cscope.*
+set wildignore+=*.o,*.obj,*.git,*.class,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap,cscope.*,tags
 
 " Turn off word wrapping
 set wrap!
@@ -150,7 +150,7 @@ set guioptions-=T
 nnoremap <MiddleMouse> <LeftMouse><MiddleMouse>
 
 " NERDTree settings {{{
-nnoremap <silent> <F7> :NERDTreeToggle<CR>
+nnoremap <silent> <F7> :NERDTreeFind<CR>
 
 " Show the bookmarks table on startup
 let NERDTreeShowBookmarks=0
@@ -178,30 +178,34 @@ let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
 " Solarise settings {{{
 "colorscheme solarized-white
 call togglebg#map("")          " Load the ToggleBG pluggin with default mapping (<F5>)
-if !has("gui_running")
+if !has('gui') && v:version < 703 " Do not load CSApprox
   set t_Co=256
+  colorscheme molokai-term
+  let g:CSApprox_loaded=1
 else
-  set background=light         " Default to light theme with GUI
-  set guifont=Monospace\ 9
+  if has('gui')
+    set background=light         " Default to light theme with GUI
+    set guifont=Monospace\ 9
+  endif
+  let g:solarized_termcolors=256
+  let g:solarized_contrast="high"
+  let g:solarized_visibility="high"
+  colorscheme molokai
 endif
 "let g:solarized_termtrans=1
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-colorscheme github
 "}}}
 
 " SuperTab settings {{{
 "let g:SuperTabDefaultCompletionType = "context"
 "}}}
 
-" DirDiff settings {{{
-if &diff
-  call DirDiff("A","B")
-endif
-let g:DirDiffExcludes = ".svn,.git,*.class,*.exe,.*.swp"
-let g:DirDiffWindowSize = 10
-"}}}
+"" DirDiff settings {{{
+"if &diff
+  "call DirDiff("A","B")
+"endif
+"let g:DirDiffExcludes = ".svn,.git,*.class,*.exe,.*.swp"
+"let g:DirDiffWindowSize = 10
+""}}}
 
 " Disable arrow keys to stay on the home row {{{
 "map <up> <nop>
@@ -273,3 +277,6 @@ nnoremap <leader>m :set expandtab tabstop=2 shiftwidth=2 softtabstop=2<CR>
 "let g:ctrlp_map = '<c-p>'
 let g:ctrlp_dotfiles = 1
 
+if has("mouse")
+  set mouse=a
+endif
