@@ -23,7 +23,7 @@ set number
 "set numberwidth=1
 set tabpagemax=20
 set wildmode=longest,list
-set wildignore+=*.o,*.obj,*.git,*.class,*.png,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap,*/i686*
+set wildignore+=*.o,*.obj,*.git,*.class,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap,*/i686*,cscope.*
 
 " Turn off word wrapping
 set wrap!
@@ -33,13 +33,13 @@ set autoindent
 set smartindent
 set cindent
 " set tab character to 2 characters
-set tabstop=2
+set tabstop=3
 " turn tabs into whitespace
 set expandtab
 set smarttab
 " indent width for autoindent
-set shiftwidth=2
-set softtabstop=2
+set shiftwidth=3
+set softtabstop=3
 
 " Special chars
 " Flag problematic whitespace (trailing and spaces before tabs)
