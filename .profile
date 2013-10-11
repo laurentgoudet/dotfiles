@@ -33,4 +33,7 @@ fi
 if [ -d "$HOME/dev/sdk/android-sdk-linux" ] ; then
     PATH="$PATH:$HOME/dev/sdk/android-sdk-linux/tools:$HOME/dev/sdk/android-sdk-linux/platform-tools"
 fi
-
+# KindleGen
+if [ -d "$HOME/Development/tools/kindlegen/" ] ; then
+    PATH="$PATH:$HOME/Development/tools/kindlegen"
+fi
