@@ -1,5 +1,5 @@
 " My VIM config
-" Chris Goudet <me@chrisgoudet.com>
+" Laurent Goudet <me@laurentgoudet.com>
 set nocompatible
 
 " Use pathogen to easily modify the runtime path to include all plugins under
