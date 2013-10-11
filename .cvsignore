@@ -3,4 +3,5 @@ i686*
 cscope.*
 .ropeproject/
 .netrwhist
+Thumbs.db
 .DS_Store
