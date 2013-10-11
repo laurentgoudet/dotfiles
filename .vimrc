@@ -276,3 +276,8 @@ let g:ctrlp_dotfiles = 1
 if has("mouse")
   set mouse=a
 endif
+
+" Fix <CTRL-Space> mapping not working under OSX Terminal.app
+if !has("gui_running")
+  noremap <C-@> <C-Space>
+endif
