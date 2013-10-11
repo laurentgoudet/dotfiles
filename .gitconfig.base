@@ -3,14 +3,14 @@
 #
 
 [user]
-  	name = Chris Goudet
-  	email = me@chrisgoudet.com
+	name = Laurent Goudet
+	email = me@laurentgoudet.com
 [core]
 	editor = vim
 	pager = less -FRX
 	excludesfile = ~/.cvsignore
 [github]
-	user = chrisgoudet
+	user = laurentgoudet
 [alias]
 	b = branch -a
 	br = branch
