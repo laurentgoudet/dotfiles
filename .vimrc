@@ -2,13 +2,28 @@
 " Laurent Goudet <me@laurentgoudet.com>
 set nocompatible
 
-" Use pathogen to easily modify the runtime path to include all plugins under
-" the ~/.vim/bundle directory
-filetype off                    " force reloading *after* pathogen loaded
-runtime bundle/pathogen/autoload/pathogen.vim " allow Pathogen to be a submodule
-call pathogen#infect()
-call pathogen#helptags()
-filetype plugin indent on       " enable detection, plugins and indenting in one step
+call plug#begin()
+Plug 'scrooloose/nerdtree'
+Plug 'kien/ctrlp.vim'
+Plug 'kevinw/pyflakes-vim'
+Plug 'godlygeek/csapprox'
+Plug 'altercation/vim-colors-solarized'
+Plug 'msanders/snipmate.vim'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ervandew/supertab'
+Plug 'kergoth/vim-hilinks' "hitlinks?
+Plug 'vim-scripts/taglist.vim'
+Plug 'scrooloose/syntastic'
+Plug 'https://github.com/laurentgoudet/vim-howdoi.git'
+Plug 'tpope/vim-fugitive'
+"Plug 'powerline'
+"Plug 'colorv'
+"Plug 'taglist'
+"Plug 'vdebug'
+call plug#end()
+
+" enable detection, plugins and indenting in one step
+filetype plugin indent on
 syntax on
 
 " Change the mapleader from \ to , (AZERTY keyboard!)
@@ -23,15 +38,15 @@ set bs=2
 "set numberwidth=1
 set tabpagemax=20
 set wildmode=longest,list
-set wildignore+=*.o,*.obj,*.git,*.class,*.png,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap,*/i686*,tags
+set wildignore+=*.o,*.obj,*.git,*.class,*.png,*.dex,*.apk,*.dex,*.d,*.ap_,*.jar,*.pcap,*/build/*,tags,*/.tmp/*
 
 " Turn off word wrapping
 set wrap!
 
 " Turn on smart indent
 set autoindent
-set smartindent
-set cindent
+"set smartindent
+"set cindent
 " set tab character to 2 characters
 set tabstop=2
 " turn tabs into whitespace
@@ -142,9 +157,9 @@ endif
 set guioptions-=T
 
 " Windows's style copy-and-paste
-"nmap <C-V> "+gP
-"imap <C-V> <ESC><C-V>i
-"vmap <C-C> "+y
+nmap <C-V> "+gP
+imap <C-V> <ESC><C-V>i
+vmap <C-C> "+y
 
 " X Window paste at mouse position and not cursor position
 nnoremap <MiddleMouse> <LeftMouse><MiddleMouse>
@@ -171,7 +186,8 @@ let NERDTreeDirArrows=1
 
 " Don't display these kinds of files
 let NERDTreeIgnore=[ '\.pyc$', '\.pyo$', '\.py\$class$', '\.obj$',
-	    \ '\.o$', '\.so$', '\.egg$', '^\.git$' , '^\.svn$' ]
+	  \ '\.o$', '\.so$', '\.egg$', '^\.git$' , '^\.svn$', '^\cscope.files$',
+    \ '\cscope.in.out$', '\cscope.out$', '\cscope.po.out$']
 
 " }}}
 
@@ -277,13 +293,37 @@ if has("mouse")
   set mouse=a
 endif
 
-" Fix <CTRL-Space> mapping not working under OSX Terminal.app
-if !has("gui_running")
-  noremap <C-@> <C-Space>
-endif
+" Fix <CTRL-Space> mapping not working
+"inoremap <C-@> <C-Space>
 
 " Fix CSApprox not working with old VIM version without gui support (EC2
 " Amazin Linux you heard me)
 if !has('gui') && v:version < 703
   let g:CSApprox_loaded = 1
 endif
+
+let g:vdebug_options = {
+    \'server' : '',
+    \'path_maps' : {'/gaf/' : '/home/laurent/gaf/'}
+  \}
+
+" Format text & comments to fit the 80 characters limit with auto reformat
+" (no gq needed)
+set textwidth=79
+set formatoptions=cq
+
+" Add spell checking and automatic wrapping at the recommended 72 columns
+" to commit messages
+autocmd Filetype gitcommit setlocal spell textwidth=72 formatoptions+=t
+
+" Correct JSON file type
+autocmd BufRead,BufNewFile *.json set filetype=json
+
+" Soft wrap by default
+set wrap linebreak nolist
+
+" 80 characters column
+autocmd Filetype javascript set colorcolumn=80
+
+" HTML files should have 4 spaces indentation
+autocmd FileType html setlocal shiftwidth=4 tabstop=4

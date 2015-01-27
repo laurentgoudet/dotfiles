@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/laurent/gaf-mobile/test'
+let g:netrw_dirhist_2='/home/laurent/gaf-mobile/www'
+let g:netrw_dirhist_3='/home/laurent/gaf-mobile/config'
+let g:netrw_dirhist_4='/home/laurent/gaf-mobile/.git'
+let g:netrw_dirhist_5='/home/laurent/gaf-mobile/app/bower_components/konami-js'
+let g:netrw_dirhist_6='/home/laurent/gaf-mobile/app/bower_components/cornify'
+let g:netrw_dirhist_7='/home/laurent/puppet/roles/external_lb/files/nginx-confdir'
+let g:netrw_dirhist_8='/home/laurent/gaf-mobile/config'

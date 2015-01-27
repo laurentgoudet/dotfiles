@@ -48,7 +48,7 @@ if has("cscope")
     set cscopeverbose
 
     " display 4 file's path components
-    set cscopepathcomp=4
+    " set cscopepathcomp=4
 
     """"""""""""" My cscope/vim key mappings
     "
@@ -99,38 +99,38 @@ if has("cscope")
     nnoremap <C-S>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 
-    " Using 'CTRL-spacebar' (intepreted as CTRL-@ by vim) then a search type
+    " Using 'CTRL-Sbar' (intepreted as CTRL-@ by vim) then a search type
     " makes the vim window split horizontally, with search result displayed in
     " the new window.
     "
     " (Note: earlier versions of vim may not have the :scs command, but it
     " can be simulated roughly via:
-    "    nnoremap <C-Space>s <C-W><C-S> :cs find s <C-R>=expand("<cword>")<CR><CR>
+    "    nnoremap <C-Space>s <C-W><C-Space> :cs find s <C-R>=expand("<cword>")<CR><CR>
 
-    nnoremap <C-Space>s :scs find s <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-Space>g :scs find g <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-Space>c :scs find c <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-Space>t :scs find t <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-Space>e :scs find e <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-Space>f :scs find f <C-R>=expand("<cfile>")<CR><CR>
-    nnoremap <C-Space>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nnoremap <C-Space>d :scs find d <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@>s :scs find s <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>g :scs find g <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>c :scs find c <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>t :scs find t <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>e :scs find e <C-R>=expand("<cword>")<CR><CR>	
+    nmap <C-@>f :scs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-@>i :scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
+    nmap <C-@>d :scs find d <C-R>=expand("<cword>")<CR><CR>	
 
 
-    " Hitting CTRL-space *twice* before the search type does a vertical
+    " Hitting CTRL-S *twice* before the search type does a vertical
     " split instead of a horizontal one (vim 6 and up only)
     "
     " (Note: you may wish to put a 'set splitright' in your .vimrc
     " if you prefer the new window on the right instead of the left
 
-    nnoremap <C-Space><C-Space>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-Space><C-Space>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-Space><C-Space>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-Space><C-Space>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-Space><C-Space>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
-    nnoremap <C-Space><C-Space>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>
-    nnoremap <C-Space><C-Space>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-    nnoremap <C-Space><C-Space>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>s :vert scs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>g :vert scs find g <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>c :vert scs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>t :vert scs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>e :vert scs find e <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-@><C-@>f :vert scs find f <C-R>=expand("<cfile>")<CR><CR>	
+    nmap <C-@><C-@>i :vert scs find i ^<C-R>=expand("<cfile>")<CR>$<CR>	
+    nmap <C-@><C-@>d :vert scs find d <C-R>=expand("<cword>")<CR><CR>
 
 
     """"""""""""" key map timeouts
