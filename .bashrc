@@ -4,7 +4,7 @@
 [ -z "$PS1" ] && return
 
 # Don't put duplicate lines in the history
-HISTCONTROL=ignoredups:ignorespace
+HISTCONTROL=ignoreboth
 
 # Append to the history file, don't overwrite it
 shopt -s histappend
@@ -34,7 +34,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -101,3 +101,17 @@ stty -ixon -ixoff
 export EDITOR="vim"
 export LANGUAGE=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
+
+#function parse_git_branch {
+    #ref=$(git symbolic-ref HEAD 2> /dev/null) || return
+    #echo "("${ref#refs/heads/}")"
+#}
+#PS1="\[\033[0;32m\]\$(date +%H:%M) \h:\w \[\033[0;31m\]\$(parse_git_branch)\[\e[0;37m\]$ "
+export PATH=$PATH:/opt/vagrant/bin
+if [ -f ~/phabricator/arcanist/resources/shell/bash-completion ]
+then
+	. ~/phabricator/arcanist/resources/shell/bash-completion
+fi
+export PATH="${PATH}:~/phabricator/arcanist/bin"
+# GruntJS completion
+eval "$(grunt --completion=bash)"
