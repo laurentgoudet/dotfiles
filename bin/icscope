@@ -1,6 +1,6 @@
 #!/bin/sh
 export CSCOPE_DB=$(pwd)
-find . \( -path '*/i686*/*' -o -path '*/.git*' -o -path '*/.svn*' \) -prune -o -type f \( \
+find . \( -path '*/build/*' -o -path '*/.git*' -o -path '*/.svn*' \) -prune -o -type f \( \
        -name '*.py' \
        -o -name '*.java' \
        -o -iname '*.[CH]' \
@@ -13,6 +13,8 @@ find . \( -path '*/i686*/*' -o -path '*/.git*' -o -path '*/.svn*' \) -prune -o -
        -o -name '*.php' \
        -o -name '*.js' \
        -o -name '*.css' \
+       -o -name '*.html' \
+       -o -name '*.htm' \
        -o -name 'CMakeLists.txt' \
        \) -print \
        > cscope.files
