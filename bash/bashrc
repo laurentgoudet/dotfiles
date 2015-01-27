@@ -115,3 +115,5 @@ fi
 export PATH="${PATH}:~/phabricator/arcanist/bin"
 # GruntJS completion
 eval "$(grunt --completion=bash)"
+
+export PATH="$HOME/.local/bin:$PATH"
