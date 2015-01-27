@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #
 # Chris's dotfile installer. Usage:
 #      ./install.sh [install|uninstall] (default: install)
